@@ -37,7 +37,6 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
 
             MenuItem::make('Users', new UserResource(), 'heroicons.outline.users'),
 
-
             MenuItem::make('Dictionary', new DictionaryResource(), 'heroicons.outline.document-duplicate'),
 
             MenuItem::make(
