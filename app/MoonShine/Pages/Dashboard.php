@@ -10,6 +10,7 @@ use App\MoonShine\Resources\ArticleResource;
 use App\MoonShine\Resources\CommentResource;
 use MoonShine\Decorations\Column;
 use MoonShine\Decorations\Grid;
+use MoonShine\Decorations\LineBreak;
 use MoonShine\Decorations\TextBlock;
 use MoonShine\Metrics\DonutChartMetric;
 use MoonShine\Metrics\LineChartMetric;
@@ -37,6 +38,8 @@ class Dashboard extends Page
                 'Welcome to MoonShine!',
                 'Demo version'
             ),
+
+            LineBreak::make(),
 
             Grid::make([
                 Column::make([

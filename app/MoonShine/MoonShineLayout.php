@@ -15,6 +15,7 @@ use MoonShine\Components\Layout\{Content,
     Profile,
     Search,
     Sidebar};
+use MoonShine\ActionButtons\ActionButton;
 use MoonShine\Contracts\MoonShineLayoutContract;
 
 final class MoonShineLayout implements MoonShineLayoutContract
@@ -52,6 +53,6 @@ final class MoonShineLayout implements MoonShineLayoutContract
                         'https://moonshine-laravel.com' => 'Documentation',
                     ]),
             ])->customAttributes(['class' => 'layout-page']),
-        ]);
+        ])->bodyClass('theme-minimalistic');
     }
 }
