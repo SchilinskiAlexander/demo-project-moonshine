@@ -14,7 +14,7 @@
         >
             <h1>{{ $dictionary->title }}</h1>
 
-            {!! $dictionary->description !!}
+            {{ $dictionary->description }}
         </div>
     </div>
 @endsection

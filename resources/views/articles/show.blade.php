@@ -28,7 +28,7 @@
             @endif
 
             <div class="mt-4">
-                {!! $article->description !!}
+                {{ $article->description }}
             </div>
         </div>
     </div>
