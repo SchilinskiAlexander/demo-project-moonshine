@@ -95,8 +95,9 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
 
             MenuItem::make(
                 'Documentation',
-                'https://moonshine-laravel.com',
-                'heroicons.outline.document-duplicate'
+                'https://moonshine-laravel.com/docs/resource/appearance/appearance-index#minimalistic',
+                'heroicons.outline.document-duplicate',
+                true
             )->badge(static fn () => 'New design'),
         ];
     }
