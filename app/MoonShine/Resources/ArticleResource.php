@@ -123,11 +123,11 @@ class ArticleResource extends ModelResource
                                 ->disk('public')
                                 ->dir('articles'),
 
-                            File::make('Files')
+                            /*File::make('Files')
                                 ->disk('public')
                                 ->multiple()
                                 ->removable()
-                                ->dir('articles'),
+                                ->dir('articles'),*/
                         ]),
 
                         Preview::make('No input field', 'no_input', static fn () => fake()->realText())
