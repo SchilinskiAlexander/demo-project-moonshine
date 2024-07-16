@@ -80,7 +80,7 @@ class ProfilePage extends Page
     public function components(): array
     {
         return [
-            FormBuilder::make(route('profile.store'))
+            FormBuilder::make(config('app.demo_mode') ? route('profile.store') : route('moonshine.profile.store'))
                 ->async()
                 ->customAttributes([
                     'enctype' => 'multipart/form-data',
