@@ -14,7 +14,8 @@ use MoonShine\Components\Layout\{Content,
     Menu,
     Profile,
     Search,
-    Sidebar};
+    Sidebar,
+    TopBar};
 use MoonShine\ActionButtons\ActionButton;
 use MoonShine\Contracts\MoonShineLayoutContract;
 
@@ -23,6 +24,9 @@ final class MoonShineLayout implements MoonShineLayoutContract
     public static function build(): LayoutBuilder
     {
         return LayoutBuilder::make([
+            TopBar::make([
+                Menu::make()->top()
+            ]),
             Sidebar::make([
                 Menu::make(),
                 Profile::make(withBorder: true),
