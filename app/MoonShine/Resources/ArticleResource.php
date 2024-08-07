@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Route;
 use Illuminate\View\ComponentAttributeBag;
 use MoonShine\ActionButtons\ActionButton;
+use MoonShine\Components\FlexibleRender;
 use MoonShine\Decorations\Block;
 use MoonShine\Decorations\Collapse;
 use MoonShine\Decorations\Column;
@@ -20,12 +21,8 @@ use MoonShine\Decorations\Heading;
 use MoonShine\Decorations\LineBreak;
 use MoonShine\Decorations\Tab;
 use MoonShine\Decorations\Tabs;
-use MoonShine\Decorations\TextBlock;
 use MoonShine\Enums\PageType;
 use MoonShine\Fields\Color;
-use MoonShine\Fields\DateRange;
-use MoonShine\Fields\File;
-use MoonShine\Fields\Hidden;
 use MoonShine\Fields\HiddenIds;
 use MoonShine\Fields\ID;
 use MoonShine\Fields\Image;
@@ -103,7 +100,9 @@ class ArticleResource extends ModelResource
                             Flex::make('flex-titles', [
                                 Text::make('Title')
                                     ->withoutWrapper()
-                                    ->required(),
+                                    ->required()
+                                    ->useOnImport()
+                                    ->showOnExport(),
 
                                 Slug::make('Slug')
                                     ->from('title')
@@ -111,7 +110,9 @@ class ArticleResource extends ModelResource
                                     ->separator('-')
                                     ->hideOnIndex()
                                     ->withoutWrapper()
-                                    ->required(),
+                                    ->required()
+                                    ->useOnImport()
+                                    ->showOnExport(),
                             ])
                                 ->justifyAlign('start')
                                 ->itemsAlign('start'),
@@ -132,7 +133,6 @@ class ArticleResource extends ModelResource
 
                         Preview::make('No input field', 'no_input', static fn () => fake()->realText())
                             ->hideOnIndex(),
-
 
                         RangeSlider::make('Age')
                             ->min(0)
@@ -323,7 +323,7 @@ class ArticleResource extends ModelResource
                     route('moonshine.articles.mass-active', $this->uriKey()),
                     fields: [
                         HiddenIds::make(),
-                        TextBlock::make('', __('moonshine::ui.confirm_message')),
+                        FlexibleRender::make('<div>' . __('moonshine::ui.confirm_message') . '</div>'),
                         Text::make('To confirm, write "yes"', 'confirm')
                             ->customAttributes(['placeholder' => 'Or no']),
                     ]
@@ -341,12 +341,12 @@ class ArticleResource extends ModelResource
 
     public function export(): ?ExportHandler
     {
-        return null;
+        return ExportHandler::make(__('moonshine::ui.export'));
     }
 
     public function import(): ?ImportHandler
     {
-        return null;
+        return ImportHandler::make(__('moonshine::ui.import'));
     }
 
     protected function resolveRoutes(): void
