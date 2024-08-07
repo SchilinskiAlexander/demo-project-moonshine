@@ -38,6 +38,8 @@ class MoonShineUserResource extends ModelResource
 
     protected bool $withPolicy = true;
 
+    protected bool $columnSelection = true;
+
     public function title(): string
     {
         return __('moonshine::ui.resource.admins_title');
@@ -58,7 +60,7 @@ class MoonShineUserResource extends ModelResource
                             'moonshineUserRole',
                             static fn (MoonshineUserRole $model) => $model->name,
                             new MoonShineUserRoleResource(),
-                        ),
+                        )->creatable(),
 
                         Text::make(trans('moonshine::ui.resource.name'), 'name')
                             ->required()

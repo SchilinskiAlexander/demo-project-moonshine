@@ -23,6 +23,8 @@ class UserResource extends ModelResource
 
     protected string $column = 'name';
 
+    protected bool $stickyTable = true;
+
     public function fields(): array
     {
         return [
