@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Layouts;
 
+use App\MoonShine\Components\DemoVersionComponent;
 use App\MoonShine\Resources\SettingResource;
+use App\MoonShine\Resources\UserResource;
 use MoonShine\Laravel\Layouts\CompactLayout;
 use MoonShine\ColorManager\ColorManager;
 use MoonShine\Contracts\ColorManager\ColorManagerContract;
@@ -45,15 +47,26 @@ final class MoonShineLayout extends CompactLayout
         ];
     }
 
-/*
-             MenuGroup::make('System', [
-                MenuItem::make('Settings', new SettingResource(), 'heroicons.outline.adjustments-vertical'),
-                MenuItem::make('Admins', new MoonShineUserResource(), 'heroicons.outline.users'),
-                MenuItem::make('Roles', new MoonShineUserRoleResource(), 'heroicons.outline.shield-exclamation'),
-            ], 'heroicons.outline.user-group')->canSee(static function () {
-                return auth('moonshine')->user()->moonshine_user_role_id === 1;
-            }),
 
+
+    protected function menu(): array
+    {
+        return [
+            MenuGroup::make(static fn () => __('moonshine::ui.resource.system'), [
+                MenuItem::make('Settings', SettingResource::class)->icon('adjustments-vertical'),
+                MenuItem::make(
+                    static fn () => __('moonshine::ui.resource.admins_title'),
+                    MoonShineUserResource::class
+                ),
+                MenuItem::make(
+                    static fn () => __('moonshine::ui.resource.role_title'),
+                    MoonShineUserRoleResource::class
+                ),
+            ])->icon('users'),
+
+            MenuItem::make('Users', UserResource::class)->icon('users'),
+
+            /*
             MenuGroup::make('Blog', [
                 MenuItem::make('Categories', new CategoryResource(), 'heroicons.outline.document'),
                 MenuItem::make('Articles', new ArticleResource(), 'heroicons.outline.newspaper'),
@@ -73,21 +86,6 @@ final class MoonShineLayout extends CompactLayout
             )->badge(static fn () => 'New design'),
         ];
  */
-
-    protected function menu(): array
-    {
-        return [
-            MenuGroup::make(static fn () => __('moonshine::ui.resource.system'), [
-                MenuItem::make('Settings', SettingResource::class)->icon('adjustments-vertical'),
-                MenuItem::make(
-                    static fn () => __('moonshine::ui.resource.admins_title'),
-                    MoonShineUserResource::class
-                ),
-                MenuItem::make(
-                    static fn () => __('moonshine::ui.resource.role_title'),
-                    MoonShineUserRoleResource::class
-                ),
-            ]),
         ];
     }
 
@@ -103,6 +101,47 @@ final class MoonShineLayout extends CompactLayout
 
     public function build(): Layout
     {
-        return parent::build();
+        parent::build();
+
+        return Layout::make([
+            Html::make([
+                $this->getHeadComponent(),
+                Body::make([
+                    Wrapper::make([
+                        $this->getSidebarComponent(),
+
+                        TopBar::make([
+                            // TODO big logo and menu
+                            Block::make([
+                                $this->getLogoComponent()->minimized(),
+                            ])->class('menu-heading-logo'),
+                            Menu::make()->top(),
+                            Block::make([
+                                ThemeSwitcher::make(),
+                            ])->class('menu-heading-mode'),
+                        ]),
+
+                        Block::make([
+                            Flash::make(),
+
+                            $this->getHeaderComponent(),
+
+                            Content::make([
+                                Components::make(
+                                    $this->getPage()->getComponents()
+                                ),
+                            ]),
+
+                            $this->getFooterComponent(),
+                        ])->class('layout-page'),
+                    ]),
+                ])->class('theme-minimalistic'),
+            ])
+                ->customAttributes([
+                    'lang' => $this->getHeadLang(),
+                ])
+                ->withAlpineJs()
+                ->withThemes(),
+        ]);
     }
 }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\MoonShine\Resources\SettingResource;
+use App\MoonShine\Resources\UserResource;
 use MoonShine\Laravel\DependencyInjection\MoonShineConfigurator;
 use MoonShine\Laravel\Providers\MoonShineApplicationServiceProvider;
 use MoonShine\Contracts\Core\ResourceContract;
@@ -22,7 +23,8 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
         return [
             MoonShineUserResource::class,
             MoonShineUserRoleResource::class,
-            SettingResource::class
+            SettingResource::class,
+            UserResource::class
         ];
     }
 
