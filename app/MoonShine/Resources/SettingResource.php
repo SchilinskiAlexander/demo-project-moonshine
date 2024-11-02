@@ -5,7 +5,6 @@ namespace App\MoonShine\Resources;
 use App\Models\Setting;
 use App\MoonShine\Pages\SettingPage;
 use App\MoonShine\Traits\CommonPageFields;
-use Illuminate\Database\Eloquent\Model;
 use MoonShine\Laravel\Resources\ModelResource;
 use MoonShine\UI\Fields\Email;
 use MoonShine\UI\Fields\ID;
@@ -14,8 +13,6 @@ use MoonShine\UI\Fields\Text;
 
 class SettingResource extends ModelResource
 {
-    use CommonPageFields;
-
     protected string $model = Setting::class;
 
     protected string $title = 'Setting';
@@ -27,6 +24,20 @@ class SettingResource extends ModelResource
             Email::make('Email'),
             Phone::make('Phone'),
             Text::make('Copyright')
+        ];
+    }
+
+    public function formFields(): array
+    {
+        return [
+            ...$this->indexFields()
+        ];
+    }
+
+    public function detailFields(): array
+    {
+        return [
+            ...$this->indexFields()
         ];
     }
 

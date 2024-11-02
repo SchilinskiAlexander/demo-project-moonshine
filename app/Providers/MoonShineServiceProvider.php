@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\MoonShine\Resources\DictionaryResource;
 use App\MoonShine\Resources\SettingResource;
 use App\MoonShine\Resources\UserResource;
 use MoonShine\Laravel\DependencyInjection\MoonShineConfigurator;
@@ -24,7 +25,8 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
             MoonShineUserResource::class,
             MoonShineUserRoleResource::class,
             SettingResource::class,
-            UserResource::class
+            UserResource::class,
+            DictionaryResource::class,
         ];
     }
 

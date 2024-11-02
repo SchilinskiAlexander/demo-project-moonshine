@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\MoonShine\Layouts;
 
 use App\MoonShine\Components\DemoVersionComponent;
+use App\MoonShine\Resources\DictionaryResource;
 use App\MoonShine\Resources\SettingResource;
 use App\MoonShine\Resources\UserResource;
 use MoonShine\Laravel\Layouts\CompactLayout;
@@ -47,8 +48,6 @@ final class MoonShineLayout extends CompactLayout
         ];
     }
 
-
-
     protected function menu(): array
     {
         return [
@@ -66,6 +65,15 @@ final class MoonShineLayout extends CompactLayout
 
             MenuItem::make('Users', UserResource::class)->icon('users'),
 
+            MenuItem::make('Dictionary', DictionaryResource::class)->icon('document-duplicate'),
+
+            MenuItem::make(
+                'Documentation',
+                'https://moonshine-laravel.com/docs/resource/appearance/appearance-index#minimalistic',
+                'document-duplicate',
+                true
+            )->badge(static fn () => 'New design'),
+
             /*
             MenuGroup::make('Blog', [
                 MenuItem::make('Categories', new CategoryResource(), 'heroicons.outline.document'),
@@ -73,18 +81,6 @@ final class MoonShineLayout extends CompactLayout
                 MenuItem::make('Comments', new CommentResource(), 'heroicons.outline.chat-bubble-left')
                     ->badge(fn () => (string) Comment::query()->count()),
             ], 'heroicons.outline.newspaper'),
-
-            MenuItem::make('Users', new UserResource(), 'heroicons.outline.users'),
-
-            MenuItem::make('Dictionary', new DictionaryResource(), 'heroicons.outline.document-duplicate'),
-
-            MenuItem::make(
-                'Documentation',
-                'https://moonshine-laravel.com/docs/resource/appearance/appearance-index#minimalistic',
-                'heroicons.outline.document-duplicate',
-                true
-            )->badge(static fn () => 'New design'),
-        ];
  */
         ];
     }
@@ -111,10 +107,6 @@ final class MoonShineLayout extends CompactLayout
                         $this->getSidebarComponent(),
 
                         TopBar::make([
-                            // TODO big logo and menu
-                            Block::make([
-                                $this->getLogoComponent()->minimized(),
-                            ])->class('menu-heading-logo'),
                             Menu::make()->top(),
                             Block::make([
                                 ThemeSwitcher::make(),

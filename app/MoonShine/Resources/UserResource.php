@@ -20,8 +20,6 @@ use MoonShine\UI\Fields\Text;
  */
 class UserResource extends ModelResource
 {
-    use CommonPageFields;
-
     protected string $model = User::class;
 
     protected string $title = 'Users';
@@ -63,6 +61,13 @@ class UserResource extends ModelResource
                     ]),
                 ]),
             ]),
+        ];
+    }
+
+    public function detailFields(): iterable
+    {
+        return [
+            ...$this->indexFields()
         ];
     }
 
