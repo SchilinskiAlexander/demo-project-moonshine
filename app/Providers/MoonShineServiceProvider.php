@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\MoonShine\Resources\SettingResource;
 use MoonShine\Laravel\DependencyInjection\MoonShineConfigurator;
 use MoonShine\Laravel\Providers\MoonShineApplicationServiceProvider;
 use MoonShine\Contracts\Core\ResourceContract;
 use MoonShine\Contracts\Core\PageContract;
-use Closure;
 use App\MoonShine\Resources\MoonShineUserResource;
 use App\MoonShine\Resources\MoonShineUserRoleResource;
 
@@ -20,10 +20,9 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
     protected function resources(): array
     {
         return [
-            
-            
             MoonShineUserResource::class,
             MoonShineUserRoleResource::class,
+            SettingResource::class
         ];
     }
 
