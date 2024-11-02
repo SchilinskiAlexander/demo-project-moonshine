@@ -1,93 +1,86 @@
 <?php
 
-use App\MoonShine\Forms\LoginForm;
-use App\MoonShine\MoonShineLayout;
-use MoonShine\Exceptions\MoonShineNotFoundException;
-use MoonShine\Http\Middleware\Authenticate;
-use MoonShine\Http\Middleware\SecurityHeadersMiddleware;
-use App\MoonShine\Pages\ProfilePage;
-use MoonShine\Permissions\Models\MoonshineUser;
+use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
+use Illuminate\Cookie\Middleware\EncryptCookies;
+use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
+use Illuminate\Routing\Middleware\SubstituteBindings;
+use Illuminate\Session\Middleware\AuthenticateSession;
+use Illuminate\Session\Middleware\StartSession;
+use Illuminate\View\Middleware\ShareErrorsFromSession;
+use MoonShine\Laravel\Exceptions\MoonShineNotFoundException;
+use MoonShine\Laravel\Forms\FiltersForm;
+use MoonShine\Laravel\Forms\LoginForm;
+use MoonShine\Laravel\Http\Middleware\Authenticate;
+use MoonShine\Laravel\Http\Middleware\ChangeLocale;
+use MoonShine\Laravel\Layouts\AppLayout;
+use MoonShine\Laravel\Models\MoonshineUser;
+use MoonShine\Laravel\Pages\Dashboard;
+use MoonShine\Laravel\Pages\ErrorPage;
+use MoonShine\Laravel\Pages\LoginPage;
+use MoonShine\Laravel\Pages\ProfilePage;
 
 return [
-    'dir' => 'app/MoonShine',
-    'namespace' => 'App\MoonShine',
-
     'title' => env('MOONSHINE_TITLE', 'MoonShine'),
-    'logo' => env('MOONSHINE_LOGO'),
-    'logo_small' => env('MOONSHINE_LOGO_SMALL'),
+    'domain' => env('MOONSHINE_DOMAIN'),
 
-    'route' => [
-        'prefix' => env('MOONSHINE_ROUTE_PREFIX', 'admin'),
-        'single_page_prefix' => 'page',
-        'middlewares' => [
-            SecurityHeadersMiddleware::class,
-        ],
-        'notFoundHandler' => MoonShineNotFoundException::class,
+    'prefix' => 'admin',
+    'page_prefix' => 'page',
+
+    'middleware' => [
+        EncryptCookies::class,
+        AddQueuedCookiesToResponse::class,
+        StartSession::class,
+        AuthenticateSession::class,
+        ShareErrorsFromSession::class,
+        VerifyCsrfToken::class,
+        SubstituteBindings::class,
+        ChangeLocale::class,
     ],
+
+    'home_route' => 'moonshine.index',
+
+    'not_found_exception' => MoonShineNotFoundException::class,
 
     'use_migrations' => true,
     'use_notifications' => true,
-    'use_theme_switcher' => true,
-
-    'layout' => MoonShineLayout::class,
+    'use_database_notifications' => true,
 
     'disk' => 'public',
+    'disk_options' => [],
+
+    'cache' => 'file',
+
+    'layout' => App\MoonShine\Layouts\MoonShineLayout::class,
+
+    'auth' => [
+        'enabled' => true,
+        'guard' => 'moonshine',
+        'model' => MoonshineUser::class,
+        'middleware' => Authenticate::class,
+        'pipelines' => [],
+    ],
+
+    'user_fields' => [
+        'username' => 'email',
+        'password' => 'password',
+        'name' => 'name',
+        'avatar' => 'avatar',
+    ],
 
     'forms' => [
         'login' => LoginForm::class,
+        'filters' => FiltersForm::class,
     ],
 
-    'pages' => array_filter(
-        [
-            'dashboard' => App\MoonShine\Pages\Dashboard::class,
-            'profile' => ProfilePage::class,
-        ]
-    ),
-
-    'model_resources' => [
-        'default_with_import' => false,
-        'default_with_export' => false,
+    'pages' => [
+        'dashboard' => App\MoonShine\Pages\Dashboard::class,
+        'profile' => ProfilePage::class,
+        'login' => LoginPage::class,
+        'error' => ErrorPage::class,
     ],
 
-    'auth' => [
-        'enable' => true,
-        'middleware' => Authenticate::class,
-        'fields' => [
-            'username' => 'email',
-            'password' => 'password',
-            'name' => 'name',
-            'avatar' => 'avatar',
-        ],
-        'guard' => 'moonshine',
-        'guards' => [
-            'moonshine' => [
-                'driver' => 'session',
-                'provider' => 'moonshine',
-            ],
-        ],
-        'providers' => [
-            'moonshine' => [
-                'driver' => 'eloquent',
-                'model' => MoonshineUser::class,
-            ],
-        ],
-    ],
+    'locale' => 'en',
     'locales' => [
-        'en',
-        'ru',
+        // en
     ],
-
-    'tinymce' => [
-        'file_manager' => env('MOONSHINE_TINYMCE_FILE_MANAGER', ''),
-        'token' => env('MOONSHINE_TINYMCE_TOKEN', ''),
-        'version' => env('MOONSHINE_TINYMCE_VERSION', '6'),
-    ],
-
-    'socialite' => array_filter(
-        [
-            'github' => ! env('DEMO_MODE', false)
-                ? '/images/icons/github-mark.svg'
-                : null,
-        ]
-    ),
 ];
