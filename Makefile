@@ -1,3 +1,5 @@
+include .env
+
 THIS_FILE := $(lastword $(MAKEFILE_LIST))
 .PHONY: build rebuild rebuild-app up migrate migrate-rollback migrate-fresh migration route-list test composer-install composer-update composer-du npm-install npm-update npm-build npm-host demo-install update git-upstream publish
 app := php-moonshine-demo
@@ -9,10 +11,12 @@ build:
 	docker-compose -f docker-compose.yml up --build -d $(c)
 rebuild:
 	docker-compose up -d --force-recreate --no-deps --build $(r)
+	@echo $(APP_URL)
 rebuild-app:
 	docker-compose up -d --force-recreate --no-deps --build $(app)
 up:
 	docker-compose -f docker-compose.yml up -d $(c)
+	@echo $(APP_URL)
 it:
 	docker exec -it $(app) /bin/bash
 
@@ -63,7 +67,7 @@ demo-install:
 update: git-upstream publish
 
 git-upstream:
-	git fetch upstream && git merge upstream/2.0
+	git fetch upstream && git merge upstream/3.x
 publish:
 	docker exec $(app) php $(path)/artisan vendor:publish --tag=laravel-assets --force $(c)
 
