@@ -9,6 +9,7 @@ use App\Models\Comment;
 use MoonShine\Apexcharts\Components\DonutChartMetric;
 use MoonShine\Apexcharts\Components\LineChartMetric;
 use MoonShine\Laravel\Pages\Page;
+use MoonShine\UI\Components\Heading;
 use MoonShine\UI\Components\Layout\Column;
 use MoonShine\UI\Components\Layout\Grid;
 use MoonShine\UI\Components\Layout\LineBreak;
@@ -32,10 +33,9 @@ class Dashboard extends Page
     public function components(): array
 	{
 		return [
-//            TextBlock::make(
-//                'Welcome to MoonShine!',
-//                'Demo version'
-//            ),
+            Heading::make('Welcome to MoonShine!', 1),
+
+            Heading::make('Demo version', 1),
 
             LineBreak::make(),
 
