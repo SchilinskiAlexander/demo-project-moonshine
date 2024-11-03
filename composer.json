@@ -7,13 +7,14 @@
     "require": {
         "php": "^8.3",
         "laravel/framework": "^11.9",
-        "laravel/tinker": "^2.9",
         "laravel/sanctum": "^4.0",
+        "laravel/tinker": "^2.9",
         "lee-to/laravel-thumbnails": "^1.0",
         "lee-to/moonshine-tree-resource": "^1.0",
         "moonshine/changelog": "^2.0",
-        "moonshine/permissions": "^2.0",
         "moonshine/moonshine": "^3.0",
+        "moonshine/permissions": "^2.0",
+        "moonshine/tinymce": "^1.0",
         "unisharp/laravel-filemanager": "^2.6"
     },
     "require-dev": {

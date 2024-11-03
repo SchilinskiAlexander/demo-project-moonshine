@@ -12,10 +12,10 @@ use App\MoonShine\Pages\Dictionary\DictionaryIndexPage;
 use MoonShine\Laravel\Fields\Slug;
 use MoonShine\Laravel\Resources\ModelResource;
 use MoonShine\Support\Enums\ClickAction;
+use MoonShine\TinyMce\Fields\TinyMce;
 use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Fields\Text;
-use MoonShine\UI\Fields\Textarea;
 
 class DictionaryResource extends ModelResource
 {
@@ -31,6 +31,15 @@ class DictionaryResource extends ModelResource
 
     protected ?ClickAction $clickAction = ClickAction::EDIT;
 
+    public function pages(): array
+    {
+        return [
+            DictionaryIndexPage::class,
+            DictionaryFormPage::class,
+            DictionaryDetailPage::class,
+        ];
+    }
+
     public function indexFields(): iterable
     {
         return [
@@ -43,8 +52,7 @@ class DictionaryResource extends ModelResource
                 ->separator('-')
                 ->from('title')
                 ->required(),
-            // TODO tinymce?
-            Textarea::make('Description'),
+            TinyMce::make('Description'),
         ];
     }
 
@@ -63,28 +71,6 @@ class DictionaryResource extends ModelResource
             ...$this->indexFields()
         ];
     }
-
-    public function pages(): array
-    {
-        return [
-            DictionaryIndexPage::class,
-            DictionaryFormPage::class,
-            DictionaryDetailPage::class,
-        ];
-    }
-
-//    public function pages(): array
-//    {
-//        return [
-//            DictionaryIndexPage::make($this->title()),
-//            DictionaryFormPage::make(
-//                $this->getItemID()
-//                    ? __('moonshine::ui.edit')
-//                    : __('moonshine::ui.add')
-//            ),
-//            DictionaryDetailPage::make(__('moonshine::ui.show')),
-//        ];
-//    }
 
     public function rules(mixed $item): array
     {
