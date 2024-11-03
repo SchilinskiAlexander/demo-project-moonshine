@@ -12,6 +12,7 @@
         "lee-to/laravel-thumbnails": "^1.0",
         "lee-to/moonshine-tree-resource": "^2.0",
         "moonshine/changelog": "^2.0",
+        "moonshine/import-export": "^1.0",
         "moonshine/moonshine": "3.*.*-dev",
         "moonshine/permissions": "^2.0",
         "moonshine/tinymce": "^1.0",

@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Layouts;
 
+use App\Models\Comment;
+use App\MoonShine\Resources\ArticleResource;
 use App\MoonShine\Resources\CategoryResource;
+use App\MoonShine\Resources\CommentResource;
 use App\MoonShine\Resources\DictionaryResource;
 use App\MoonShine\Resources\SettingResource;
 use App\MoonShine\Resources\UserResource;
@@ -67,9 +70,9 @@ final class MoonShineLayout extends CompactLayout
 
             MenuGroup::make('Blog', [
                 MenuItem::make('Categories', CategoryResource::class, 'document'),
-                //                MenuItem::make('Articles', new ArticleResource(), 'heroicons.outline.newspaper'),
-                //                MenuItem::make('Comments', new CommentResource(), 'heroicons.outline.chat-bubble-left')
-                //                    ->badge(fn () => (string) Comment::query()->count()),
+                MenuItem::make('Articles', ArticleResource::class, 'newspaper'),
+                MenuItem::make('Comments', CommentResource::class, 'chat-bubble-left')
+                    ->badge(fn () => (string) Comment::query()->count()),
             ], 'newspaper'),
 
             MenuItem::make('Dictionary', DictionaryResource::class)->icon('document-duplicate'),
@@ -80,15 +83,6 @@ final class MoonShineLayout extends CompactLayout
                 'document-duplicate',
                 true
             )->badge(static fn () => 'New design'),
-
-            /*
-            MenuGroup::make('Blog', [
-                MenuItem::make('Categories', new CategoryResource(), 'heroicons.outline.document'),
-                MenuItem::make('Articles', new ArticleResource(), 'heroicons.outline.newspaper'),
-                MenuItem::make('Comments', new CommentResource(), 'heroicons.outline.chat-bubble-left')
-                    ->badge(fn () => (string) Comment::query()->count()),
-            ], 'heroicons.outline.newspaper'),
- */
         ];
     }
 
@@ -112,12 +106,12 @@ final class MoonShineLayout extends CompactLayout
                         $this->getSidebarComponent(),
 
                         // TODO верхнее меню открывается вместе с боковым
-                        TopBar::make([
-                            Menu::make()->top(),
-                            Block::make([
-                                ThemeSwitcher::make(),
-                            ])->class('menu-heading-mode'),
-                        ]),
+//                        TopBar::make([
+//                            Menu::make()->top(),
+//                            Block::make([
+//                                ThemeSwitcher::make(),
+//                            ])->class('menu-heading-mode'),
+//                        ]),
 
                         Block::make([
                             Flash::make(),

@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\MoonShine\Resources\ArticleResource;
 use App\MoonShine\Resources\CategoryResource;
+use App\MoonShine\Resources\CommentResource;
 use App\MoonShine\Resources\DictionaryResource;
 use App\MoonShine\Resources\SettingResource;
 use App\MoonShine\Resources\UserResource;
@@ -29,6 +31,8 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
             UserResource::class,
             DictionaryResource::class,
             CategoryResource::class,
+            ArticleResource::class,
+            CommentResource::class,
         ];
     }
 
