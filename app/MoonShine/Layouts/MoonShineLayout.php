@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Layouts;
 
-use App\MoonShine\Components\DemoVersionComponent;
+use App\MoonShine\Resources\CategoryResource;
 use App\MoonShine\Resources\DictionaryResource;
 use App\MoonShine\Resources\SettingResource;
 use App\MoonShine\Resources\UserResource;
@@ -65,6 +65,13 @@ final class MoonShineLayout extends CompactLayout
 
             MenuItem::make('Users', UserResource::class)->icon('users'),
 
+            MenuGroup::make('Blog', [
+                MenuItem::make('Categories', CategoryResource::class, 'document'),
+                //                MenuItem::make('Articles', new ArticleResource(), 'heroicons.outline.newspaper'),
+                //                MenuItem::make('Comments', new CommentResource(), 'heroicons.outline.chat-bubble-left')
+                //                    ->badge(fn () => (string) Comment::query()->count()),
+            ], 'newspaper'),
+
             MenuItem::make('Dictionary', DictionaryResource::class)->icon('document-duplicate'),
 
             MenuItem::make(
@@ -97,8 +104,6 @@ final class MoonShineLayout extends CompactLayout
 
     public function build(): Layout
     {
-        parent::build();
-
         return Layout::make([
             Html::make([
                 $this->getHeadComponent(),
@@ -106,6 +111,7 @@ final class MoonShineLayout extends CompactLayout
                     Wrapper::make([
                         $this->getSidebarComponent(),
 
+                        // TODO верхнее меню открывается вместе с боковым
                         TopBar::make([
                             Menu::make()->top(),
                             Block::make([

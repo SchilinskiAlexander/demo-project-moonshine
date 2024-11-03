@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "29879b29fbfe7ce7679617c199ca04ba",
+    "content-hash": "a9d38d7b057ab5856f9f4b3cd073cdae",
     "packages": [
         {
             "name": "brick/math",
@@ -2133,16 +2133,16 @@
         },
         {
             "name": "lee-to/moonshine-tree-resource",
-            "version": "1.2.1",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lee-to/moonshine-tree-resource.git",
-                "reference": "be78b16aba30625b0a9f8617148f3424ac2adea0"
+                "reference": "f3295d64ed63065f8082aa347505500abe856b96"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lee-to/moonshine-tree-resource/zipball/be78b16aba30625b0a9f8617148f3424ac2adea0",
-                "reference": "be78b16aba30625b0a9f8617148f3424ac2adea0",
+                "url": "https://api.github.com/repos/lee-to/moonshine-tree-resource/zipball/f3295d64ed63065f8082aa347505500abe856b96",
+                "reference": "f3295d64ed63065f8082aa347505500abe856b96",
                 "shasum": ""
             },
             "require": {
@@ -2186,7 +2186,7 @@
                 "issues": "https://github.com/lee-to/moonshine-tree-resource/issues",
                 "source": "https://github.com/lee-to/moonshine-tree-resource"
             },
-            "time": "2023-12-21T11:09:05+00:00"
+            "time": "2024-10-19T20:59:12+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -2356,16 +2356,16 @@
         },
         {
             "name": "moonshine/moonshine",
-            "version": "3.0.0-beta.1",
+            "version": "3.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moonshine-software/moonshine.git",
-                "reference": "a9fb7961acef1f05ef808a874ed7bde8a4cd2c4d"
+                "reference": "0cc219e391f163d19e6825a5dbf82e229687623a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moonshine-software/moonshine/zipball/a9fb7961acef1f05ef808a874ed7bde8a4cd2c4d",
-                "reference": "a9fb7961acef1f05ef808a874ed7bde8a4cd2c4d",
+                "url": "https://api.github.com/repos/moonshine-software/moonshine/zipball/0cc219e391f163d19e6825a5dbf82e229687623a",
+                "reference": "0cc219e391f163d19e6825a5dbf82e229687623a",
                 "shasum": ""
             },
             "require": {
@@ -2391,8 +2391,9 @@
                 "moonshine/ui": "self.version"
             },
             "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.64",
                 "larastan/larastan": "^2.0",
-                "moonshine/import-export": "dev-master",
+                "moonshine/import-export": "^1.0",
                 "orchestra/testbench": "^9.0",
                 "pestphp/pest": "^3.0",
                 "pestphp/pest-plugin-laravel": "^3.0",
@@ -2408,24 +2409,51 @@
                 }
             },
             "autoload": {
+                "psr-4": {
+                    "MoonShine\\": "src/",
+                    "MoonShine\\AssetManager\\": "src/AssetManager/src",
+                    "MoonShine\\ColorManager\\": "src/ColorManager/src",
+                    "MoonShine\\Contracts\\": "src/Contracts/src",
+                    "MoonShine\\Core\\": "src/Core/src",
+                    "MoonShine\\Laravel\\": "src/Laravel/src",
+                    "MoonShine\\Laravel\\Database\\Factories\\": "src/Laravel/database/factories/",
+                    "MoonShine\\MenuManager\\": "src/MenuManager/src",
+                    "MoonShine\\Support\\": "src/Support/src",
+                    "MoonShine\\UI\\": "src/UI/src"
+                },
                 "files": [
                     "src/Laravel/src/helpers.php",
                     "src/Support/src/helpers.php"
-                ],
+                ]
+            },
+            "autoload-dev": {
                 "psr-4": {
-                    "MoonShine\\": "src/",
-                    "MoonShine\\UI\\": "src/UI/src",
-                    "MoonShine\\Core\\": "src/Core/src",
-                    "MoonShine\\Laravel\\": "src/Laravel/src",
-                    "MoonShine\\Support\\": "src/Support/src",
-                    "MoonShine\\Contracts\\": "src/Contracts/src",
-                    "MoonShine\\MenuManager\\": "src/MenuManager/src",
-                    "MoonShine\\AssetManager\\": "src/AssetManager/src",
-                    "MoonShine\\ColorManager\\": "src/ColorManager/src",
-                    "MoonShine\\Laravel\\Database\\Factories\\": "src/Laravel/database/factories/"
+                    "App\\": "app/",
+                    "MoonShine\\Tests\\": "tests/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "scripts": {
+                "analyse": [
+                    "vendor/bin/phpstan analyse src --memory-limit=-1"
+                ],
+                "rector": [
+                    "vendor/bin/rector process --clear-cache"
+                ],
+                "rector:dry": [
+                    "vendor/bin/rector process --clear-cache --dry-run"
+                ],
+                "test": [
+                    "vendor/bin/pest"
+                ],
+                "test:fresh": [
+                    "rm -rf vendor/orchestra",
+                    "composer install",
+                    "vendor/bin/pest --bail"
+                ],
+                "format": [
+                    "vendor/bin/php-cs-fixer fix --allow-risky=yes"
+                ]
+            },
             "license": [
                 "MIT"
             ],
@@ -2450,15 +2478,15 @@
             },
             "funding": [
                 {
-                    "url": "https://github.com/moonshine-software",
-                    "type": "github"
+                    "type": "github",
+                    "url": "https://github.com/moonshine-software"
                 },
                 {
-                    "url": "https://opencollective.com/moonshine",
-                    "type": "open_collective"
+                    "type": "open_collective",
+                    "url": "https://opencollective.com/moonshine"
                 }
             ],
-            "time": "2024-09-23T08:17:26+00:00"
+            "time": "2024-11-01T08:17:56+00:00"
         },
         {
             "name": "moonshine/permissions",
@@ -8889,7 +8917,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {},
+    "stability-flags": {
+        "moonshine/moonshine": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

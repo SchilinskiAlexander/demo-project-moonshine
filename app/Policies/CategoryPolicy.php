@@ -4,7 +4,7 @@ namespace App\Policies;
 
 use App\Models\Category;
 use Illuminate\Auth\Access\HandlesAuthorization;
-use MoonShine\Models\MoonshineUser;
+use MoonShine\Laravel\Models\MoonshineUser;
 
 class CategoryPolicy
 {

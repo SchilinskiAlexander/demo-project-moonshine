@@ -10,9 +10,9 @@
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
         "lee-to/laravel-thumbnails": "^1.0",
-        "lee-to/moonshine-tree-resource": "^1.0",
+        "lee-to/moonshine-tree-resource": "^2.0",
         "moonshine/changelog": "^2.0",
-        "moonshine/moonshine": "^3.0",
+        "moonshine/moonshine": "3.*.*-dev",
         "moonshine/permissions": "^2.0",
         "moonshine/tinymce": "^1.0",
         "unisharp/laravel-filemanager": "^2.6"
@@ -74,6 +74,18 @@
             "php-http/discovery": true
         }
     },
+    "repositories": [
+        {
+            "type": "github",
+            "url": "https://github.com/moonshine-software/moonshine",
+            "options": {
+                "versions": {
+                    "moonshine/moonshine": "3.*.*-dev"
+                },
+                "symlink": true
+            }
+        }
+    ],
     "minimum-stability": "dev",
     "prefer-stable": true
 }

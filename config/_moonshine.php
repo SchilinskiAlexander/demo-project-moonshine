@@ -21,23 +21,11 @@ use MoonShine\Laravel\Pages\ProfilePage;
 
 return [
     'title' => env('MOONSHINE_TITLE', 'MoonShine'),
-
-    // Default flags
-    'use_migrations' => true,
-    'use_notifications' => true,
-    'use_database_notifications' => true,
-
-    // Routing
     'domain' => env('MOONSHINE_DOMAIN'),
-    'prefix' => env('MOONSHINE_ROUTE_PREFIX', 'admin'),
-    'page_prefix' => env('MOONSHINE_PAGE_PREFIX', 'page'),
-    'resource_prefix' => env('MOONSHINE_RESOURCE_PREFIX', 'resource'),
-    'home_route' => 'moonshine.index',
 
-    // Error handling
-    'not_found_exception' => MoonShineNotFoundException::class,
+    'prefix' => 'admin',
+    'page_prefix' => 'page',
 
-    // Middleware
     'middleware' => [
         EncryptCookies::class,
         AddQueuedCookiesToResponse::class,
@@ -49,12 +37,21 @@ return [
         ChangeLocale::class,
     ],
 
-    // Storage
+    'home_route' => 'moonshine.index',
+
+    'not_found_exception' => MoonShineNotFoundException::class,
+
+    'use_migrations' => true,
+    'use_notifications' => true,
+    'use_database_notifications' => true,
+
     'disk' => 'public',
     'disk_options' => [],
+
     'cache' => 'file',
 
-    // Authentication and profile
+    'layout' => App\MoonShine\Layouts\MoonShineLayout::class,
+
     'auth' => [
         'enabled' => true,
         'guard' => 'moonshine',
@@ -63,16 +60,12 @@ return [
         'pipelines' => [],
     ],
 
-    // Authentication and profile
     'user_fields' => [
         'username' => 'email',
         'password' => 'password',
         'name' => 'name',
         'avatar' => 'avatar',
     ],
-
-    // Layout, pages, forms
-    'layout' => \App\MoonShine\Layouts\MoonShineLayout::class,
 
     'forms' => [
         'login' => LoginForm::class,
@@ -86,7 +79,6 @@ return [
         'error' => ErrorPage::class,
     ],
 
-    // Localizations
     'locale' => 'en',
     'locales' => [
         // en
