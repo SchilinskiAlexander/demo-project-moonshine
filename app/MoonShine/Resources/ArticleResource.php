@@ -392,6 +392,8 @@ class ArticleResource extends ModelResource implements HasImportExportContract
 
     public function indexButtons(): ListOf
     {
+        $tableName = $this->getIndexPage()->getListComponentName();
+
         return new ListOf(ActionButtonContract::class, [
             ...parent::indexButtons()->toArray(),
 
@@ -399,14 +401,14 @@ class ArticleResource extends ModelResource implements HasImportExportContract
                 ->inModal(fn () => 'Active', fn (): string => (string) FormBuilder::make(
                     route('moonshine.articles.mass-active', $this->getUriKey()),
                     fields: [
-                        HiddenIds::make('index-table-article-resource'),
+                        HiddenIds::make($tableName),
                         FlexibleRender::make('<div>' . __('moonshine::ui.confirm_message') . '</div>'),
                         Text::make('To confirm, write "yes"', 'confirm')
                             ->customAttributes(['placeholder' => 'Or no']),
                     ]
                 )
-                    ->async(events: [AlpineJs::event(JsEvent::TABLE_UPDATED, 'index-table-article-resource')])
-                    ->submit(__('moonshine::ui.delete'), ['class' => 'btn-secondary']))
+                    ->async(events: [AlpineJs::event(JsEvent::TABLE_UPDATED, $tableName)])
+                    ->submit(__('moonshine::ui.confirm'), ['class' => 'btn-secondary']))
                     ->bulk()
             ,
 
