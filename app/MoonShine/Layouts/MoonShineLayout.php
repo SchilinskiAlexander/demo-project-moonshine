@@ -19,12 +19,13 @@ use MoonShine\UI\Components\{Components,
     Layout\Div,
     Layout\Flash,
     Layout\Body,
-
     Layout\Content,
     Layout\Html,
     Layout\Layout,
-    Layout\Wrapper,
-};
+    Layout\Menu,
+    Layout\ThemeSwitcher,
+    Layout\TopBar,
+    Layout\Wrapper};
 use MoonShine\Laravel\Resources\MoonShineUserResource;
 use MoonShine\Laravel\Resources\MoonShineUserRoleResource;
 use MoonShine\MenuManager\MenuGroup;
@@ -86,20 +87,20 @@ final class MoonShineLayout extends CompactLayout
 
     public function build(): Layout
     {
+        parent::build();
+
         return Layout::make([
             Html::make([
                 $this->getHeadComponent(),
                 Body::make([
                     Wrapper::make([
-                        $this->getSidebarComponent(),
+                        TopBar::make([
+                            Div::make([
+                                Menu::make()->top(),
+                            ])->class('menu-navigation'),
+                        ]),
 
-                        // TODO верхнее меню открывается вместе с боковым
-//                        TopBar::make([
-//                            Menu::make()->top(),
-//                            Block::make([
-//                                ThemeSwitcher::make(),
-//                            ])->class('menu-heading-mode'),
-//                        ]),
+                        $this->getSidebarComponent(),
 
                         Div::make([
                             DemoVersionComponent::make(),
