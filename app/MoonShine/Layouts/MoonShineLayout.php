@@ -14,30 +14,16 @@ use App\MoonShine\Resources\UserResource;
 use MoonShine\Laravel\Layouts\CompactLayout;
 use MoonShine\ColorManager\ColorManager;
 use MoonShine\Contracts\ColorManager\ColorManagerContract;
-use MoonShine\Laravel\Components\Layout\{Locales, Notifications, Profile, Search};
-use MoonShine\UI\Components\{Breadcrumbs,
-    Components,
+use MoonShine\UI\Components\{Components,
     Layout\Div,
     Layout\Flash,
-    Layout\Block,
     Layout\Body,
-    Layout\Burger,
+
     Layout\Content,
-    Layout\Footer,
-    Layout\Head,
-    Layout\Favicon,
-    Layout\Assets,
-    Layout\Meta,
-    Layout\Header,
     Layout\Html,
     Layout\Layout,
-    Layout\Logo,
-    Layout\Menu,
-    Layout\Sidebar,
-    Layout\ThemeSwitcher,
-    Layout\TopBar,
     Layout\Wrapper,
-    When};
+};
 use MoonShine\Laravel\Resources\MoonShineUserResource;
 use MoonShine\Laravel\Resources\MoonShineUserRoleResource;
 use MoonShine\MenuManager\MenuGroup;
