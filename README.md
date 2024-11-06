@@ -1,6 +1,10 @@
 ## Installation
 
 ### Docker
+ - Create a .env file and copy the values from .env.example,
+ - Change DOCKER_USER value,
+ - Configure the ports and database to work (optional).
+
 The demo can be run to docker-compose. Use:
 ```
 make demo-install
