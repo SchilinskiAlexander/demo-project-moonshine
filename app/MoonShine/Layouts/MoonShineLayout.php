@@ -23,7 +23,6 @@ use MoonShine\UI\Components\{Components,
     Layout\Html,
     Layout\Layout,
     Layout\Menu,
-    Layout\ThemeSwitcher,
     Layout\TopBar,
     Layout\Wrapper};
 use MoonShine\Laravel\Resources\MoonShineUserResource;
@@ -66,12 +65,6 @@ final class MoonShineLayout extends CompactLayout
 
             MenuItem::make('Dictionary', DictionaryResource::class)->icon('document-duplicate'),
 
-            MenuItem::make(
-                'Documentation',
-                'https://moonshine-laravel.com/docs/resource/appearance/appearance-index#minimalistic',
-                'document-duplicate',
-                true
-            )->badge(static fn () => 'New design'),
         ];
     }
 
@@ -96,7 +89,14 @@ final class MoonShineLayout extends CompactLayout
                     Wrapper::make([
                         TopBar::make([
                             Div::make([
-                                Menu::make()->top(),
+                                Menu::make(elements: [
+                                    MenuItem::make(
+                                        'Documentation',
+                                        'https://moonshine-laravel.com/docs/resource/appearance/appearance-index#minimalistic',
+                                        'document-duplicate',
+                                        true
+                                    )->badge(static fn () => 'New design'),
+                                ])->top(),
                             ])->class('menu-navigation'),
                         ]),
 
