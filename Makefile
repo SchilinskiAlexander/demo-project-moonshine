@@ -1,4 +1,4 @@
-include .env
+-include .env
 
 THIS_FILE := $(lastword $(MAKEFILE_LIST))
 .PHONY: build rebuild rebuild-app up migrate migrate-rollback migrate-fresh migration route-list test composer-install composer-update composer-du npm-install npm-update npm-build npm-host demo-install update git-upstream publish
@@ -48,13 +48,12 @@ npm-install:
 npm-update:
 	docker-compose run --rm --service-ports $(app-npm) update $(c)
 npm-build:
-	docker-compose run --rm --service-ports $(app-npm) run dev $(c)
+	docker-compose run --rm --service-ports $(app-npm) run build $(c)
 npm-host:
 	docker-compose run --rm --service-ports $(app-npm) run dev --host $(c)
 
 #moonshine
 demo-install:
-	cp .env.example .env
 	make build
 	make npm-install
 	make npm-build
@@ -62,6 +61,8 @@ demo-install:
 	docker exec $(app) php $(path)/artisan key:generate
 	docker exec $(app) php $(path)/artisan storage:link
 	make migrate-fresh
+	@echo $(APP_URL)
+	@echo "$(APP_URL)/admin"
 
 #for contributors
 update: git-upstream publish
