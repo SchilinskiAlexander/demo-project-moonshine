@@ -3,19 +3,17 @@
 namespace App\MoonShine\Resources;
 
 use App\Models\Category;
-use App\MoonShine\Category\CategoryIndexPage;
+use App\MoonShine\Pages\Category\CategoryIndexPage;
 use Illuminate\Database\Eloquent\Model;
 
 use Leeto\MoonShineTree\Resources\TreeResource;
-use MoonShine\Decorations\Block;
-use MoonShine\Enums\PageType;
-use MoonShine\Fields\Relationships\BelongsTo;
-use MoonShine\Fields\Text;
-use MoonShine\Pages\Crud\DetailPage;
-use MoonShine\Pages\Crud\FormPage;
-use MoonShine\Pages\Crud\IndexPage;
-use MoonShine\Resources\ModelResource;
-use MoonShine\Fields\ID;
+use MoonShine\Laravel\Fields\Relationships\BelongsTo;
+use MoonShine\Laravel\Pages\Crud\DetailPage;
+use MoonShine\Laravel\Pages\Crud\FormPage;
+use MoonShine\Support\Enums\PageType;
+use MoonShine\UI\Components\Layout\Box;
+use MoonShine\UI\Fields\ID;
+use MoonShine\UI\Fields\Text;
 
 class CategoryResource extends TreeResource
 {
@@ -40,29 +38,39 @@ class CategoryResource extends TreeResource
     protected function pages(): array
     {
         return [
-            CategoryIndexPage::make($this->title()),
-            FormPage::make(
-                $this->getItemID()
-                    ? __('moonshine::ui.edit')
-                    : __('moonshine::ui.add')
-            ),
-            DetailPage::make(__('moonshine::ui.show')),
+            CategoryIndexPage::class,
+            FormPage::class,
+            DetailPage::class,
         ];
     }
 
-    public function fields(): array
+    public function indexFields(): iterable
+    {
+        return [
+            ID::make()->sortable(),
+            BelongsTo::make('Category')
+                ->nullable(),
+            Text::make('Title')->required(),
+        ];
+    }
+
+    public function formFields(): iterable
 	{
 		return [
-            Block::make([
-                ID::make()->sortable(),
-                BelongsTo::make('Category')
-                    ->nullable(),
-                Text::make('Title')->required(),
+            Box::make([
+                ...$this->indexFields()
             ])
         ];
 	}
 
-	public function rules(Model $item): array
+    public function detailFields(): iterable
+    {
+        return [
+            ...$this->indexFields()
+        ];
+    }
+
+	public function rules(mixed $item): array
 	{
 	    return [
             'title' => ['required', 'string', 'min:5'],
@@ -81,6 +89,6 @@ class CategoryResource extends TreeResource
 
     public function sortKey(): string
     {
-        return $this->sortColumn();
+        return $this->getSortColumn();
     }
 }

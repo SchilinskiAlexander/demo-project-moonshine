@@ -6,27 +6,26 @@ namespace App\MoonShine\Pages;
 
 use App\Models\Article;
 use App\Models\Comment;
-use App\MoonShine\Resources\ArticleResource;
-use App\MoonShine\Resources\CommentResource;
-use MoonShine\Decorations\Column;
-use MoonShine\Decorations\Grid;
-use MoonShine\Decorations\LineBreak;
-use MoonShine\Decorations\TextBlock;
-use MoonShine\Metrics\DonutChartMetric;
-use MoonShine\Metrics\LineChartMetric;
-use MoonShine\Metrics\ValueMetric;
-use MoonShine\Pages\Page;
+use MoonShine\Apexcharts\Components\DonutChartMetric;
+use MoonShine\Apexcharts\Components\LineChartMetric;
+use MoonShine\Laravel\Pages\Page;
+use MoonShine\UI\Components\Heading;
+use MoonShine\UI\Components\Layout\Column;
+use MoonShine\UI\Components\Layout\Grid;
+use MoonShine\UI\Components\Layout\LineBreak;
+use MoonShine\UI\Components\Metrics\Wrapped\ValueMetric;
+
 
 class Dashboard extends Page
 {
-    public function breadcrumbs(): array
+    public function getBreadcrumbs(): array
     {
         return [
-            '#' => $this->title()
+            '#' => $this->getTitle()
         ];
     }
 
-    public function title(): string
+    public function getTitle(): string
     {
         return 'Dashboard';
     }
@@ -34,10 +33,9 @@ class Dashboard extends Page
     public function components(): array
 	{
 		return [
-            TextBlock::make(
-                'Welcome to MoonShine!',
-                'Demo version'
-            ),
+            Heading::make('Welcome to MoonShine!', 1),
+
+            Heading::make('Demo version', 1),
 
             LineBreak::make(),
 

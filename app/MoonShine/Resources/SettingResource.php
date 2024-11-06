@@ -4,13 +4,12 @@ namespace App\MoonShine\Resources;
 
 use App\Models\Setting;
 use App\MoonShine\Pages\SettingPage;
-use Illuminate\Database\Eloquent\Model;
-use MoonShine\Decorations\Block;
-use MoonShine\Fields\Email;
-use MoonShine\Fields\ID;
-use MoonShine\Fields\Phone;
-use MoonShine\Fields\Text;
-use MoonShine\Resources\ModelResource;
+use App\MoonShine\Traits\CommonPageFields;
+use MoonShine\Laravel\Resources\ModelResource;
+use MoonShine\UI\Fields\Email;
+use MoonShine\UI\Fields\ID;
+use MoonShine\UI\Fields\Phone;
+use MoonShine\UI\Fields\Text;
 
 class SettingResource extends ModelResource
 {
@@ -18,22 +17,34 @@ class SettingResource extends ModelResource
 
     protected string $title = 'Setting';
 
-    public function fields(): array
+    public function indexFields(): array
     {
         return [
-            Block::make([
-                ID::make()->sortable(),
-                Email::make('Email'),
-                Phone::make('Phone'),
-                Text::make('Copyright')
-            ])
+            ID::make()->sortable(),
+            Email::make('Email'),
+            Phone::make('Phone'),
+            Text::make('Copyright')
+        ];
+    }
+
+    public function formFields(): array
+    {
+        return [
+            ...$this->indexFields()
+        ];
+    }
+
+    public function detailFields(): array
+    {
+        return [
+            ...$this->indexFields()
         ];
     }
 
     protected function pages(): array
     {
         return [
-            SettingPage::make()
+            SettingPage::class
         ];
     }
 
@@ -42,7 +53,7 @@ class SettingResource extends ModelResource
         return 1;
     }
 
-    public function rules(Model $item): array
+    public function rules(mixed $item): array
     {
         return [];
     }

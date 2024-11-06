@@ -3,13 +3,11 @@
 namespace App\MoonShine\Resources;
 
 use App\Models\Comment;
-use Illuminate\Database\Eloquent\Model;
-
-use MoonShine\Decorations\Block;
-use MoonShine\Fields\Relationships\BelongsTo;
-use MoonShine\Fields\Text;
-use MoonShine\Resources\ModelResource;
-use MoonShine\Fields\ID;
+use MoonShine\Laravel\Fields\Relationships\BelongsTo;
+use MoonShine\Laravel\Resources\ModelResource;
+use MoonShine\UI\Components\Layout\Box;
+use MoonShine\UI\Fields\ID;
+use MoonShine\UI\Fields\Text;
 
 class CommentResource extends ModelResource
 {
@@ -19,19 +17,33 @@ class CommentResource extends ModelResource
 
     protected array $with = ['user', 'article'];
 
-	public function fields(): array
+    public function indexFields(): iterable
+    {
+        return [
+            ID::make()->sortable(),
+            BelongsTo::make('Article'),
+            BelongsTo::make('User'),
+            Text::make('Text')->required(),
+        ];
+    }
+
+	public function formFields(): array
 	{
 		return [
-            Block::make([
-                ID::make()->sortable(),
-                BelongsTo::make('Article'),
-                BelongsTo::make('User'),
-                Text::make('Text')->required(),
+            Box::make([
+                ...$this->indexFields()
             ])
         ];
 	}
 
-	public function rules(Model $item): array
+    public function detailFields(): iterable
+    {
+        return [
+            ...$this->indexFields()
+        ];
+    }
+
+	public function rules(mixed $item): array
 	{
 	    return [
             'text' => ['required', 'string', 'min:1'],

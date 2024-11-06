@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Pages\Dictionary;
 
+use App\MoonShine\Resources\MoonShineUserResource;
 use MoonShine\ChangeLog\Components\ChangeLog;
-use MoonShine\Decorations\Heading;
-use MoonShine\Pages\Crud\FormPage;
+use MoonShine\Laravel\Pages\Crud\FormPage;
+use MoonShine\UI\Components\Heading;
+
 
 class DictionaryFormPage extends FormPage
 {
@@ -23,7 +25,11 @@ class DictionaryFormPage extends FormPage
     {
         return [
             ...parent::bottomLayer(),
-            ChangeLog::make('Changelog', $this->getResource())
+            ChangeLog::make(
+                'Changelog',
+                $this->getResource(),
+                userResource: MoonShineUserResource::class
+            )
         ];
     }
 }

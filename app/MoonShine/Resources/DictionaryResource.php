@@ -5,18 +5,17 @@ declare(strict_types=1);
 namespace App\MoonShine\Resources;
 
 use App\Models\Dictionary;
+
 use App\MoonShine\Pages\Dictionary\DictionaryDetailPage;
 use App\MoonShine\Pages\Dictionary\DictionaryFormPage;
 use App\MoonShine\Pages\Dictionary\DictionaryIndexPage;
-use Illuminate\Database\Eloquent\Model;
-
-use MoonShine\Decorations\Block;
-use MoonShine\Enums\ClickAction;
-use MoonShine\Fields\Slug;
-use MoonShine\Fields\Text;
-use MoonShine\Fields\TinyMce;
-use MoonShine\Resources\ModelResource;
-use MoonShine\Fields\ID;
+use MoonShine\Laravel\Fields\Slug;
+use MoonShine\Laravel\Resources\ModelResource;
+use MoonShine\Support\Enums\ClickAction;
+use MoonShine\TinyMce\Fields\TinyMce;
+use MoonShine\UI\Components\Layout\Box;
+use MoonShine\UI\Fields\ID;
+use MoonShine\UI\Fields\Text;
 
 class DictionaryResource extends ModelResource
 {
@@ -26,44 +25,52 @@ class DictionaryResource extends ModelResource
 
     protected bool $withPolicy = true;
 
-    protected bool $isAsync = true;
-
     protected bool $createInModal = true;
 
     protected ?ClickAction $clickAction = ClickAction::EDIT;
 
-    public function fields(): array
+    public function pages(): array
     {
         return [
-            Block::make([
-                ID::make()->sortable(),
-                Text::make('Title')
-                    ->updateOnPreview()
-                    ->required(),
-                Slug::make('Slug')
-                    ->unique()
-                    ->separator('-')
-                    ->from('title')
-                    ->required(),
-                TinyMce::make('Description'),
+            DictionaryIndexPage::class,
+            DictionaryFormPage::class,
+            DictionaryDetailPage::class,
+        ];
+    }
+
+    public function indexFields(): iterable
+    {
+        return [
+            ID::make()->sortable(),
+            Text::make('Title')
+                ->updateOnPreview()
+                ->required(),
+            Slug::make('Slug')
+                ->unique()
+                ->separator('-')
+                ->from('title')
+                ->required(),
+            TinyMce::make('Description'),
+        ];
+    }
+
+    public function formFields(): iterable
+    {
+        return [
+            Box::make([
+                ...$this->indexFields()
             ])
         ];
     }
 
-    public function pages(): array
+    public function detailFields(): iterable
     {
         return [
-            DictionaryIndexPage::make($this->title()),
-            DictionaryFormPage::make(
-                $this->getItemID()
-                    ? __('moonshine::ui.edit')
-                    : __('moonshine::ui.add')
-            ),
-            DictionaryDetailPage::make(__('moonshine::ui.show')),
+            ...$this->indexFields()
         ];
     }
 
-    public function rules(Model $item): array
+    public function rules(mixed $item): array
     {
         return [
             'title' => ['required', 'string', 'min:1'],

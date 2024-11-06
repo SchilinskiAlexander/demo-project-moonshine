@@ -4,13 +4,8 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Pages\Dictionary;
 
-use MoonShine\Decorations\Block;
-use MoonShine\Decorations\Heading;
-use MoonShine\Fields\ID;
-use MoonShine\Fields\Slug;
-use MoonShine\Fields\Text;
-use MoonShine\Fields\TinyMce;
-use MoonShine\Pages\Crud\IndexPage;
+use MoonShine\Laravel\Pages\Crud\IndexPage;
+use MoonShine\UI\Components\Heading;
 
 class DictionaryIndexPage extends IndexPage
 {

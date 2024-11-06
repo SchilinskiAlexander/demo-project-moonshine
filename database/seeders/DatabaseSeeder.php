@@ -4,21 +4,19 @@ namespace Database\Seeders;
 
 use App\Models\Article;
 use App\Models\Category;
-use App\Models\Setting;
 use App\Models\User;
+// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use MoonShine\Models\MoonshineUser;
-use MoonShine\Models\MoonshineUserRole;
+use MoonShine\Laravel\Models\MoonshineUser;
+use MoonShine\Laravel\Models\MoonshineUserRole;
 
 class DatabaseSeeder extends Seeder
 {
     /**
      * Seed the application's database.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
         MoonshineUser::query()->create([
             'name' => 'Admin',

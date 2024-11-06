@@ -25,3 +25,6 @@ Route::controller(DictionaryController::class)
         Route::get('/', 'index')->name('index');
         Route::get('/{dictionary:slug}', 'show')->name('show');
     });
+
+Route::post('mass-active', [\App\MoonShine\Controllers\ArticleController::class, 'massActive'])
+    ->name('moonshine.articles.mass-active');

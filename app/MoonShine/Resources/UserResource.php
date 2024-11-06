@@ -3,18 +3,21 @@
 namespace App\MoonShine\Resources;
 
 use App\Models\User;
-use Illuminate\Database\Eloquent\Model;
-use MoonShine\Decorations\Block;
-use MoonShine\Decorations\Column;
-use MoonShine\Decorations\Grid;
-use MoonShine\Decorations\LineBreak;
-use MoonShine\Fields\Email;
-use MoonShine\Fields\ID;
-use MoonShine\Fields\Password;
-use MoonShine\Fields\PasswordRepeat;
-use MoonShine\Fields\Text;
-use MoonShine\Resources\ModelResource;
+use App\MoonShine\Traits\CommonPageFields;
+use MoonShine\Laravel\Resources\ModelResource;
+use MoonShine\UI\Components\Layout\Box;
+use MoonShine\UI\Components\Layout\Column;
+use MoonShine\UI\Components\Layout\Grid;
+use MoonShine\UI\Components\Layout\LineBreak;
+use MoonShine\UI\Fields\Email;
+use MoonShine\UI\Fields\ID;
+use MoonShine\UI\Fields\Password;
+use MoonShine\UI\Fields\PasswordRepeat;
+use MoonShine\UI\Fields\Text;
 
+/**
+ * @template TData of User
+ */
 class UserResource extends ModelResource
 {
     protected string $model = User::class;
@@ -25,12 +28,21 @@ class UserResource extends ModelResource
 
     protected bool $stickyTable = true;
 
-    public function fields(): array
+    public function indexFields(): iterable
+    {
+        return [
+            ID::make()->sortable(),
+            Text::make('Name'),
+            Email::make('E-mail', 'email'),
+        ];
+    }
+
+    public function formFields(): iterable
     {
         return [
             Grid::make([
                 Column::make([
-                    Block::make('Contact information', [
+                    Box::make('Contact information', [
                         ID::make()->sortable(),
                         Text::make('Name'),
                         Email::make('E-mail', 'email'),
@@ -38,21 +50,28 @@ class UserResource extends ModelResource
 
                     LineBreak::make(),
 
-                    Block::make('Change password', [
+                    Box::make('Change password', [
                         Password::make('Password')
                             ->customAttributes(['autocomplete' => 'new-password'])
-                            ->hideOnIndex(),
+                        ,
 
                         PasswordRepeat::make('Password repeat')
                             ->customAttributes(['autocomplete' => 'confirm-password'])
-                            ->hideOnIndex(),
+                        ,
                     ]),
                 ]),
             ]),
         ];
     }
 
-    public function rules(Model $item): array
+    public function detailFields(): iterable
+    {
+        return [
+            ...$this->indexFields()
+        ];
+    }
+
+    public function rules(mixed $item): array
     {
         return [
             'name' => 'required',

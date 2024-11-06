@@ -4,20 +4,21 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Pages;
 
-use MoonShine\Components\FormBuilder;
-use MoonShine\Fields\Hidden;
-use MoonShine\Pages\Crud\FormPage;
+
+use MoonShine\Laravel\Pages\Crud\FormPage;
+use MoonShine\UI\Components\FormBuilder;
+use MoonShine\UI\Fields\Hidden;
 
 class SettingPage extends FormPage
 {
-    public function breadcrumbs(): array
+    public function getBreadcrumbs(): array
     {
         return [
-            '#' => $this->title(),
+            '#' => $this->getTitle(),
         ];
     }
 
-    public function title(): string
+    public function getTitle(): string
     {
         return $this->title ?: 'Settings';
     }
@@ -28,10 +29,7 @@ class SettingPage extends FormPage
 
         return [
             FormBuilder::make(
-                $this->getResource()->route(
-                    'crud.update',
-                    $item->getKey()
-                )
+                $this->getResource()->getRoute('crud.update', $item->getKey())
             )
                 ->async()
                 ->fields(
@@ -43,7 +41,7 @@ class SettingPage extends FormPage
                         ->toArray()
                 )
                 ->name('crud')
-                ->fillCast($item, $this->getResource()->getModelCast())
+                ->fillCast($item, $this->getResource()->getCaster())
                 ->submit(__('moonshine::ui.save'), ['class' => 'btn-primary btn-lg']),
         ];
     }

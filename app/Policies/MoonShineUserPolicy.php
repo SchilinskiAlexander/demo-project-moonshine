@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use MoonShine\Models\MoonShineUser;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use MoonShine\Permissions\Models\MoonshineUser;
 
 class MoonShineUserPolicy
 {
