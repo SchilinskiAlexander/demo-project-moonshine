@@ -2,6 +2,7 @@
 
 use App\MoonShine\Forms\LoginForm;
 use App\MoonShine\Pages\Dashboard;
+use App\MoonShine\Pages\ProfilePage;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -15,7 +16,7 @@ use MoonShine\Laravel\Http\Middleware\Authenticate;
 use MoonShine\Laravel\Http\Middleware\ChangeLocale;
 use MoonShine\Laravel\Pages\ErrorPage;
 use MoonShine\Laravel\Pages\LoginPage;
-use MoonShine\Laravel\Pages\ProfilePage;
+
 use MoonShine\Permissions\Models\MoonshineUser;
 
 return [

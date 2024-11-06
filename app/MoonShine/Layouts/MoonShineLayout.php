@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\MoonShine\Layouts;
 
 use App\Models\Comment;
+use App\MoonShine\Components\DemoVersionComponent;
 use App\MoonShine\Resources\ArticleResource;
 use App\MoonShine\Resources\CategoryResource;
 use App\MoonShine\Resources\CommentResource;
@@ -101,6 +102,8 @@ final class MoonShineLayout extends CompactLayout
 //                        ]),
 
                         Div::make([
+                            DemoVersionComponent::make(),
+
                             Flash::make(),
 
                             $this->getHeaderComponent(),
