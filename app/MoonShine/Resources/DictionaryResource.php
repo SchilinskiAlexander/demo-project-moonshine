@@ -23,10 +23,7 @@ class DictionaryResource extends ModelResource
 
     protected string $title = 'Dictionary';
 
-    // TODO не работает $withPolicy
-    //protected bool $withPolicy = true;
-
-    protected bool $isAsync = true;
+    protected bool $withPolicy = true;
 
     protected bool $createInModal = true;
 

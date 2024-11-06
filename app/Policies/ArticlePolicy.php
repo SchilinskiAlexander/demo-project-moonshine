@@ -4,7 +4,8 @@ namespace App\Policies;
 
 use App\Models\Article;
 use Illuminate\Auth\Access\HandlesAuthorization;
-use MoonShine\Models\MoonshineUser;
+use MoonShine\Permissions\Models\MoonshineUser;
+
 
 class ArticlePolicy
 {

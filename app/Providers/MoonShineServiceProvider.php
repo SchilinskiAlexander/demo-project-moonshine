@@ -10,44 +10,41 @@ use App\MoonShine\Resources\CommentResource;
 use App\MoonShine\Resources\DictionaryResource;
 use App\MoonShine\Resources\SettingResource;
 use App\MoonShine\Resources\UserResource;
+use Illuminate\Support\Facades\Vite;
+use Illuminate\Support\ServiceProvider;
+use MoonShine\AssetManager\Js;
+use MoonShine\Contracts\Core\DependencyInjection\ConfiguratorContract;
+use MoonShine\Contracts\Core\DependencyInjection\CoreContract;
+use MoonShine\Laravel\DependencyInjection\MoonShine;
 use MoonShine\Laravel\DependencyInjection\MoonShineConfigurator;
-use MoonShine\Laravel\Providers\MoonShineApplicationServiceProvider;
-use MoonShine\Contracts\Core\ResourceContract;
-use MoonShine\Contracts\Core\PageContract;
 use App\MoonShine\Resources\MoonShineUserResource;
 use App\MoonShine\Resources\MoonShineUserRoleResource;
 
-class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
+class MoonShineServiceProvider extends ServiceProvider
 {
     /**
-     * @return array<class-string<ResourceContract>>
+     * @param  MoonShine  $core
+     * @param  MoonShineConfigurator  $config
+     *
      */
-    protected function resources(): array
+    public function boot(CoreContract $core, ConfiguratorContract $config): void
     {
-        return [
-            MoonShineUserResource::class,
-            MoonShineUserRoleResource::class,
-            SettingResource::class,
-            UserResource::class,
-            DictionaryResource::class,
-            CategoryResource::class,
-            ArticleResource::class,
-            CommentResource::class,
-        ];
-    }
+        $config->authEnable();
 
-    /**
-     * @return array<class-string<PageContract>>
-     */
-    protected function pages(): array
-    {
-        return [
-            ...moonshineConfig()->getPages(),
-        ];
-    }
-
-    protected function configure(MoonShineConfigurator $config): MoonShineConfigurator
-    {
-        return $config;
+        $core
+            ->resources([
+                MoonShineUserResource::class,
+                MoonShineUserRoleResource::class,
+                SettingResource::class,
+                UserResource::class,
+                DictionaryResource::class,
+                CategoryResource::class,
+                ArticleResource::class,
+                CommentResource::class,
+            ])
+            ->pages([
+                ...$config->getPages(),
+            ])
+        ;
     }
 }

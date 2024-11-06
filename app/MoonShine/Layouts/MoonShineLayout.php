@@ -17,6 +17,7 @@ use MoonShine\Contracts\ColorManager\ColorManagerContract;
 use MoonShine\Laravel\Components\Layout\{Locales, Notifications, Profile, Search};
 use MoonShine\UI\Components\{Breadcrumbs,
     Components,
+    Layout\Div,
     Layout\Flash,
     Layout\Block,
     Layout\Body,
@@ -113,7 +114,7 @@ final class MoonShineLayout extends CompactLayout
 //                            ])->class('menu-heading-mode'),
 //                        ]),
 
-                        Block::make([
+                        Div::make([
                             Flash::make(),
 
                             $this->getHeaderComponent(),

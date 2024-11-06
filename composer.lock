@@ -2421,16 +2421,16 @@
         },
         {
             "name": "moonshine/import-export",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moonshine-software/import-export.git",
-                "reference": "bc7f650f1208b8c5fb1a4f3d3b9893f3fc9e8dab"
+                "reference": "3a1027e25a0be829020f846480dc27e9a50ca83b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moonshine-software/import-export/zipball/bc7f650f1208b8c5fb1a4f3d3b9893f3fc9e8dab",
-                "reference": "bc7f650f1208b8c5fb1a4f3d3b9893f3fc9e8dab",
+                "url": "https://api.github.com/repos/moonshine-software/import-export/zipball/3a1027e25a0be829020f846480dc27e9a50ca83b",
+                "reference": "3a1027e25a0be829020f846480dc27e9a50ca83b",
                 "shasum": ""
             },
             "require": {
@@ -2476,7 +2476,7 @@
                 "issues": "https://github.com/moonshine-software/import-export/issues",
                 "source": "https://github.com/moonshine-software/import-export"
             },
-            "time": "2024-10-26T18:30:43+00:00"
+            "time": "2024-11-03T17:15:04+00:00"
         },
         {
             "name": "moonshine/moonshine",
@@ -2484,12 +2484,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/moonshine-software/moonshine.git",
-                "reference": "0cc219e391f163d19e6825a5dbf82e229687623a"
+                "reference": "513870c4f83dd62440b5d63bfad9309056433df4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moonshine-software/moonshine/zipball/0cc219e391f163d19e6825a5dbf82e229687623a",
-                "reference": "0cc219e391f163d19e6825a5dbf82e229687623a",
+                "url": "https://api.github.com/repos/moonshine-software/moonshine/zipball/513870c4f83dd62440b5d63bfad9309056433df4",
+                "reference": "513870c4f83dd62440b5d63bfad9309056433df4",
                 "shasum": ""
             },
             "require": {
@@ -2610,7 +2610,7 @@
                     "url": "https://opencollective.com/moonshine"
                 }
             ],
-            "time": "2024-11-01T08:17:56+00:00"
+            "time": "2024-11-05T12:38:32+00:00"
         },
         {
             "name": "moonshine/permissions",
@@ -2680,16 +2680,16 @@
         },
         {
             "name": "moonshine/tinymce",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moonshine-software/tinymce.git",
-                "reference": "58e6b1d63b447030ca23dba382e86a544e252576"
+                "reference": "0b29c00196ed987b7e7480015adbe7828df09eec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moonshine-software/tinymce/zipball/58e6b1d63b447030ca23dba382e86a544e252576",
-                "reference": "58e6b1d63b447030ca23dba382e86a544e252576",
+                "url": "https://api.github.com/repos/moonshine-software/tinymce/zipball/0b29c00196ed987b7e7480015adbe7828df09eec",
+                "reference": "0b29c00196ed987b7e7480015adbe7828df09eec",
                 "shasum": ""
             },
             "require": {
@@ -2740,24 +2740,24 @@
                 "issues": "https://github.com/moonshine-software/tinymce/issues",
                 "source": "https://github.com/moonshine-software/tinymce"
             },
-            "time": "2024-10-11T11:19:49+00:00"
+            "time": "2024-11-01T07:57:57+00:00"
         },
         {
             "name": "nesbot/carbon",
-            "version": "3.8.0",
+            "version": "3.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "bbd3eef89af8ba66a3aa7952b5439168fbcc529f"
+                "reference": "10ac0aa86b8062219ce21e8189123d611ca3ecd9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/bbd3eef89af8ba66a3aa7952b5439168fbcc529f",
-                "reference": "bbd3eef89af8ba66a3aa7952b5439168fbcc529f",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/10ac0aa86b8062219ce21e8189123d611ca3ecd9",
+                "reference": "10ac0aa86b8062219ce21e8189123d611ca3ecd9",
                 "shasum": ""
             },
             "require": {
-                "carbonphp/carbon-doctrine-types": "*",
+                "carbonphp/carbon-doctrine-types": "<100.0",
                 "ext-json": "*",
                 "php": "^8.1",
                 "psr/clock": "^1.0",
@@ -2846,7 +2846,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-08-19T06:22:39+00:00"
+            "time": "2024-11-03T16:02:24+00:00"
         },
         {
             "name": "nette/schema",

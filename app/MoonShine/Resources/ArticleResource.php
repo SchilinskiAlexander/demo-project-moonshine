@@ -18,6 +18,8 @@ use MoonShine\Laravel\Fields\Relationships\HasOne;
 use MoonShine\Laravel\Fields\Slug;
 use MoonShine\Laravel\QueryTags\QueryTag;
 use MoonShine\Laravel\Resources\ModelResource;
+use MoonShine\Support\AlpineJs;
+use MoonShine\Support\Enums\JsEvent;
 use MoonShine\Support\Enums\PageType;
 use MoonShine\Support\ListOf;
 use MoonShine\TinyMce\Fields\TinyMce;
@@ -57,8 +59,7 @@ class ArticleResource extends ModelResource implements HasImportExportContract
 
     public string $sortColumn = 'created_at';
 
-    // TODO не работает $withPolicy
-    //public bool $withPolicy = true;
+    public bool $withPolicy = true;
 
     public array $with = [
         'author',
@@ -394,19 +395,17 @@ class ArticleResource extends ModelResource implements HasImportExportContract
         return new ListOf(ActionButtonContract::class, [
             ...parent::indexButtons()->toArray(),
 
-            // TODO не подгружаются id в HiddenIds при выборе
             ActionButton::make('Active', route('moonshine.articles.mass-active', $this->getUriKey()))
                 ->inModal(fn () => 'Active', fn (): string => (string) FormBuilder::make(
                     route('moonshine.articles.mass-active', $this->getUriKey()),
                     fields: [
-                        HiddenIds::make('mass-active-form'),
+                        HiddenIds::make('index-table-article-resource'),
                         FlexibleRender::make('<div>' . __('moonshine::ui.confirm_message') . '</div>'),
                         Text::make('To confirm, write "yes"', 'confirm')
                             ->customAttributes(['placeholder' => 'Or no']),
                     ]
                 )
-                    ->name('mass-active-form')
-                    ->async()
+                    ->async(events: [AlpineJs::event(JsEvent::TABLE_UPDATED, 'index-table-article-resource')])
                     ->submit(__('moonshine::ui.delete'), ['class' => 'btn-secondary']))
                     ->bulk()
             ,
@@ -417,15 +416,4 @@ class ArticleResource extends ModelResource implements HasImportExportContract
             )->icon('paper-clip'),
         ]);
     }
-
-//    public function export(): ?ExportHandler
-//    {
-//        return ExportHandler::make(__('moonshine::ui.export'));
-//    }
-//
-//    public function import(): ?ImportHandler
-//    {
-//        return ImportHandler::make(__('moonshine::ui.import'));
-//    }
-
 }

@@ -4,7 +4,7 @@ namespace App\Policies;
 
 use App\Models\Dictionary;
 use Illuminate\Auth\Access\HandlesAuthorization;
-use MoonShine\Laravel\Models\MoonshineUser;
+use MoonShine\Permissions\Models\MoonshineUser;
 
 
 class DictionaryPolicy

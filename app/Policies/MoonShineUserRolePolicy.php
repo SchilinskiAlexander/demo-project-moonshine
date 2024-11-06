@@ -2,9 +2,10 @@
 
 namespace App\Policies;
 
-use MoonShine\Models\MoonShineUser;
+
 use Illuminate\Auth\Access\HandlesAuthorization;
-use MoonShine\Models\MoonshineUserRole;
+use MoonShine\Laravel\Models\MoonshineUserRole;
+use MoonShine\Permissions\Models\MoonshineUser;
 
 class MoonShineUserRolePolicy
 {
