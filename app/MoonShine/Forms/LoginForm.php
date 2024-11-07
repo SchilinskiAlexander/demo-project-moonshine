@@ -31,9 +31,7 @@ final class LoginForm
 
                 Password::make(__('moonshine::ui.login.password'), 'password')
                     ->required()
-                    ->customAttributes([
-                        'value' => 'moonshine'
-                    ]),
+                    ->x('bind:value', '"moonshine"'),
 
                 Switcher::make(__('moonshine::ui.login.remember_me'), 'remember'),
             ])->submit(__('moonshine::ui.login.login'), [
