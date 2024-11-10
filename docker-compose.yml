@@ -1,68 +1,63 @@
-version: '3.8'
-
-networks:
-  moonshine-demo-network:
-   name: 'moonshine-demo-network'
-
 services:
-  nginx-moonshine-demo:
-    build: ./docker/Nginx
-    container_name: nginx-moonshine-demo
-    ports:
-      - "${DOCKER_WEB_PORT}:80"
-    volumes:
-      - ${DOCKER_PATH_HOST}:${APP_PATH}
-      - ./docker/volumes/Nginx/logs:/var/log/nginx/
-    depends_on:
-      - php-moonshine-demo
-    networks:
-      - moonshine-demo-network
-
-  php-moonshine-demo:
+  nginx:
     build:
-      context: ./docker/PHP8
-      args:
-        docker_user: ${DOCKER_USER}
-    container_name: php-moonshine-demo
+      context: .
+      dockerfile: ./docker/dockerfiles/nginx/Dockerfile
+      target: dev
+    container_name: ${COMPOSE_PROJECT_NAME}-nginx
+    ports:
+      - "${APP_WEB_PORT}:80"
     volumes:
-      - ${DOCKER_PATH_HOST}:${APP_PATH}
+      - ./:${APP_PATH}
     depends_on:
-      - db-moonshine-demo
-    networks:
-      - moonshine-demo-network
+      - php
 
-  db-moonshine-demo:
-    image: mariadb:11.0.2
-    container_name: db-moonshine-demo
+  php:
+    build:
+      args:
+        user: ${DOCKER_USER}
+        uid: 1000
+        target: dev
+      context: .
+      dockerfile: ./docker/dockerfiles/php/Dockerfile
+      target: dev
+    container_name: ${COMPOSE_PROJECT_NAME}-php
+    volumes:
+      - ./:${APP_PATH}
+    depends_on:
+      - db
+      - redis
+
+  db:
+    container_name: ${COMPOSE_PROJECT_NAME}-db
+    build:
+      context: .
+      dockerfile: ./docker/dockerfiles/mysql/Dockerfile
+    volumes:
+      - ./docker/volumes/mysql:/var/lib/mysql
+    ports:
+      - "${APP_MYSQL_PORT}:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASS}
-    volumes:
-      - ./docker/volumes/MySQL/lib:/var/lib/mysql
-      - ./docker/volumes/MySQL/dump:/docker-entrypoint-initdb.d
-    ports:
-      - "${DOCKER_MYSQL_PORT}:3306"
-    networks:
-      - moonshine-demo-network
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASS}
 
-  redis-moonshine-demo:
-    image: redis:7.2-rc-alpine3.18
-    command: ["redis-server", "--appendonly", "yes"]
-    container_name: redis-moonshine-demo
-    ports:
-      - "${DOCKER_REDIS_PORT}:6379"
-    networks:
-      - moonshine-demo-network
-
-  npm-moonshine-demo:
-    build: ./docker/Node
-    container_name: npm-moonshine-demo
+  redis:
+    container_name: ${COMPOSE_PROJECT_NAME}-redis
+    image: redis:7.0.11-alpine
     volumes:
-      - ${DOCKER_PATH_HOST}:${APP_PATH}:cached
-      - ${DOCKER_PATH_HOST}.env:${APP_PATH}/.env
+      - ./docker/volumes/redis:/data
+    ports:
+      - "${APP_REDIS_PORT}:6379"
+
+  npm:
+    build:
+      context: .
+      dockerfile: ./docker/dockerfiles/node/Dockerfile
+    container_name: ${COMPOSE_PROJECT_NAME}-npm
+    volumes:
+      - ./:${APP_PATH}:cached
+      - ./.env:${APP_PATH}/.env
     working_dir: ${APP_PATH}
     profiles: ["npm"]
     entrypoint: ['npm']
     ports:
-      - "${DOCKER_VITE_PORT}:5173"
-    networks:
-      - moonshine-demo-network
+      - "${VITE_PORT}:${VITE_PORT}"
