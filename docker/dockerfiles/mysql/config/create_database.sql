@@ -8,5 +8,3 @@ GRANT ALL PRIVILEGES ON `moonshine_demo_test`.* TO 'moonshine_demo'@'%';
 
 GRANT SELECT  ON `information\_schema`.* TO 'moonshine_demo'@'%';
 FLUSH PRIVILEGES;
-
-SET GLOBAL time_zone = 'Europe/Moscow';

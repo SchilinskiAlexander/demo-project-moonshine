@@ -22,6 +22,6 @@ yarn-error.log
 /.zed
 docker-compose.override.yml
 #docker
-/docker/volumes/Nginx/logs
-/docker/volumes/MySQL/lib
+/docker/volumes/mysql
+/docker/volumes/redis
 
