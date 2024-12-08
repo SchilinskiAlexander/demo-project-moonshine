@@ -296,16 +296,12 @@ class ArticleResource extends ModelResource implements HasImportExportContract
     public function metrics(): array
     {
         return [
-            Grid::make([
-                Column::make([
-                    ValueMetric::make('Articles')
-                        ->value(Article::query()->count()),
-                ])->columnSpan(6),
-                Column::make([
-                    ValueMetric::make('Comments')
-                        ->value(Comment::query()->count()),
-                ])->columnSpan(6),
-            ]),
+            ValueMetric::make('Articles')
+                ->value(Article::query()->count())
+                ->columnSpan(6),
+            ValueMetric::make('Comments')
+                ->value(Comment::query()->count())
+                ->columnSpan(6),
         ];
     }
 
