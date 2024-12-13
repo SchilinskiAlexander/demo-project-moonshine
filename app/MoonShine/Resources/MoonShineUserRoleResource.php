@@ -4,12 +4,16 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources;
 
+use MoonShine\Contracts\UI\ComponentContract;
+use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Laravel\Models\MoonshineUserRole;
 use MoonShine\Laravel\Resources\ModelResource;
 use MoonShine\Support\Attributes\Icon;
 use MoonShine\Support\ListOf;
 use MoonShine\UI\Components\ActionButton;
 use MoonShine\UI\Components\Layout\Box;
+use MoonShine\UI\Components\Layout\Column;
+use MoonShine\UI\Components\Table\TableBuilder;
 use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Fields\Text;
 
@@ -63,6 +67,15 @@ class MoonShineUserRoleResource extends ModelResource
                     ->required(),
             ]),
         ];
+    }
+
+    /** @param TableBuilder $component */
+    public function modifyDetailComponent(ComponentContract $component): ComponentContract
+    {
+        return $component->vertical(
+            title: fn(FieldContract $field, Column $default, TableBuilder $ctx) => $default->columnSpan(2),
+            value: fn(FieldContract $field, Column $default, TableBuilder $ctx) => $default->columnSpan(10),
+        );
     }
 
     /**

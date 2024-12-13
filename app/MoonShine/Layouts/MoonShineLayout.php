@@ -12,6 +12,7 @@ use App\MoonShine\Resources\CommentResource;
 use App\MoonShine\Resources\DictionaryResource;
 use App\MoonShine\Resources\SettingResource;
 use App\MoonShine\Resources\UserResource;
+use MoonShine\Laravel\Layouts\AppLayout;
 use MoonShine\Laravel\Layouts\CompactLayout;
 use MoonShine\ColorManager\ColorManager;
 use MoonShine\Contracts\ColorManager\ColorManagerContract;
@@ -30,7 +31,7 @@ use MoonShine\Laravel\Resources\MoonShineUserRoleResource;
 use MoonShine\MenuManager\MenuGroup;
 use MoonShine\MenuManager\MenuItem;
 
-final class MoonShineLayout extends CompactLayout
+final class MoonShineLayout extends AppLayout
 {
     protected function assets(): array
     {
@@ -87,19 +88,6 @@ final class MoonShineLayout extends CompactLayout
                 $this->getHeadComponent(),
                 Body::make([
                     Wrapper::make([
-                        TopBar::make([
-                            Div::make([
-                                Menu::make(elements: [
-                                    MenuItem::make(
-                                        'Documentation',
-                                        'https://moonshine-laravel.com/docs/resource/appearance/appearance-index#minimalistic',
-                                        'document-duplicate',
-                                        true
-                                    )->badge(static fn () => 'New design'),
-                                ])->top(),
-                            ])->class('menu-navigation'),
-                        ]),
-
                         $this->getSidebarComponent(),
 
                         Div::make([

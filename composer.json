@@ -14,8 +14,9 @@
         "moonshine/apexcharts": "^1.0",
         "moonshine/changelog": "^2.0",
         "moonshine/import-export": "^1.0",
-        "moonshine/moonshine": "3.*.*-dev",
+        "moonshine/moonshine": "^3.0",
         "moonshine/permissions": "^2.0",
+        "moonshine/ru": "^1.0",
         "moonshine/tinymce": "^1.0",
         "unisharp/laravel-filemanager": "^2.6"
     },
@@ -76,18 +77,6 @@
             "php-http/discovery": true
         }
     },
-    "repositories": [
-        {
-            "type": "github",
-            "url": "https://github.com/moonshine-software/moonshine",
-            "options": {
-                "versions": {
-                    "moonshine/moonshine": "3.*.*-dev"
-                },
-                "symlink": true
-            }
-        }
-    ],
     "minimum-stability": "dev",
     "prefer-stable": true
 }

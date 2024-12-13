@@ -89,6 +89,7 @@ return [
     // Localizations
     'locale' => 'en',
     'locales' => [
-        // en
+        'en',
+        'ru',
     ],
 ];

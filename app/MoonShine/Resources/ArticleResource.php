@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use MoonShine\Contracts\Core\TypeCasts\DataWrapperContract;
 use MoonShine\Contracts\UI\ActionButtonContract;
+use MoonShine\Contracts\UI\ComponentContract;
+use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\ImportExport\Contracts\HasImportExportContract;
 use MoonShine\ImportExport\Traits\ImportExportConcern;
 use MoonShine\Laravel\Fields\Relationships\BelongsTo;
@@ -34,6 +36,7 @@ use MoonShine\UI\Components\Layout\Flex;
 use MoonShine\UI\Components\Layout\Grid;
 use MoonShine\UI\Components\Layout\LineBreak;
 use MoonShine\UI\Components\Metrics\Wrapped\ValueMetric;
+use MoonShine\UI\Components\Table\TableBuilder;
 use MoonShine\UI\Components\Tabs;
 use MoonShine\UI\Components\Tabs\Tab;
 use MoonShine\UI\Fields\Color;
@@ -138,7 +141,6 @@ class ArticleResource extends ModelResource implements HasImportExportContract
                 ->suffix('url')
             ,
 
-            // TODO Color если null в базе то падает с ошибкой
             Color::make('Color')->default('red'),
 
             Json::make('Data')->fields([
@@ -276,6 +278,20 @@ class ArticleResource extends ModelResource implements HasImportExportContract
                 ->async()
             ,
         ];
+    }
+
+    protected function detailFields(): iterable
+    {
+        return $this->indexFields();
+    }
+
+    /** @param TableBuilder $component */
+    public function modifyDetailComponent(ComponentContract $component): ComponentContract
+    {
+        return $component->vertical(
+            title: fn(FieldContract $field, Column $default, TableBuilder $ctx) => $default->columnSpan(2),
+            value: fn(FieldContract $field, Column $default, TableBuilder $ctx) => $default->columnSpan(10),
+        );
     }
 
     public function queryTags(): array
