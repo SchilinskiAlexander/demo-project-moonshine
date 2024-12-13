@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "eff9b99d4a4fdcd3bd5f5ad140c33adb",
+    "content-hash": "6edab53ff279cc813d21bf4219701fd5",
     "packages": [
         {
             "name": "brick/math",
@@ -2663,16 +2663,16 @@
         },
         {
             "name": "moonshine/moonshine",
-            "version": "3.0.1",
+            "version": "3.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moonshine-software/moonshine.git",
-                "reference": "ca82821f14ee1c9e48aed5cd7c46f32d838bbcf5"
+                "reference": "05d6b89b2adae0379c003b6e973f65b18dfabc70"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moonshine-software/moonshine/zipball/ca82821f14ee1c9e48aed5cd7c46f32d838bbcf5",
-                "reference": "ca82821f14ee1c9e48aed5cd7c46f32d838bbcf5",
+                "url": "https://api.github.com/repos/moonshine-software/moonshine/zipball/05d6b89b2adae0379c003b6e973f65b18dfabc70",
+                "reference": "05d6b89b2adae0379c003b6e973f65b18dfabc70",
                 "shasum": ""
             },
             "require": {
@@ -2766,7 +2766,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2024-12-11T07:15:46+00:00"
+            "time": "2024-12-13T14:21:05+00:00"
         },
         {
             "name": "moonshine/permissions",
@@ -9482,7 +9482,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^8.3"
+        "php": "^8.2"
     },
     "platform-dev": [],
     "plugin-api-version": "2.6.0"
