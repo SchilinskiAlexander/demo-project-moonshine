@@ -2,10 +2,12 @@
 
 namespace App\Policies;
 
+
 use Illuminate\Auth\Access\HandlesAuthorization;
+use MoonShine\Laravel\Models\MoonshineUserRole;
 use MoonShine\Permissions\Models\MoonshineUser;
 
-class MoonShineUserPolicy
+class MoonshineUserRolePolicy
 {
     use HandlesAuthorization;
 
@@ -14,7 +16,7 @@ class MoonShineUserPolicy
         return $user->moonshine_user_role_id === 1;
     }
 
-    public function view(MoonShineUser $user, MoonShineUser $moonShineUser): bool
+    public function view(MoonShineUser $user, MoonshineUserRole $role): bool
     {
         return $user->moonshine_user_role_id === 1;
     }
@@ -28,7 +30,7 @@ class MoonShineUserPolicy
         return $user->moonshine_user_role_id === 1;
     }
 
-    public function update(MoonShineUser $user, MoonShineUser $moonShineUser): bool
+    public function update(MoonShineUser $user, MoonshineUserRole $role): bool
     {
         if(config('app.demo_mode', false)) {
             return false;
@@ -37,7 +39,7 @@ class MoonShineUserPolicy
         return $user->moonshine_user_role_id === 1;
     }
 
-    public function delete(MoonShineUser $user, MoonShineUser $moonShineUser): bool
+    public function delete(MoonShineUser $user, MoonshineUserRole $role): bool
     {
         if(config('app.demo_mode', false)) {
             return false;
@@ -46,7 +48,7 @@ class MoonShineUserPolicy
         return $user->moonshine_user_role_id === 1;
     }
 
-    public function restore(MoonShineUser $user, MoonShineUser $moonShineUser): bool
+    public function restore(MoonShineUser $user, MoonshineUserRole $role): bool
     {
         if(config('app.demo_mode', false)) {
             return false;
@@ -55,7 +57,7 @@ class MoonShineUserPolicy
         return $user->moonshine_user_role_id === 1;
     }
 
-    public function forceDelete(MoonShineUser $user, MoonShineUser $moonShineUser): bool
+    public function forceDelete(MoonShineUser $user, MoonshineUserRole $role): bool
     {
         if(config('app.demo_mode', false)) {
             return false;
