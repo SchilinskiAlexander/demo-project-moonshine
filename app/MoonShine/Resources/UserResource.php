@@ -3,7 +3,6 @@
 namespace App\MoonShine\Resources;
 
 use App\Models\User;
-use App\MoonShine\Traits\CommonPageFields;
 use MoonShine\Laravel\Resources\ModelResource;
 use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Components\Layout\Column;

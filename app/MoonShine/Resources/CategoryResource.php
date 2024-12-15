@@ -4,8 +4,6 @@ namespace App\MoonShine\Resources;
 
 use App\Models\Category;
 use App\MoonShine\Pages\Category\CategoryIndexPage;
-use Illuminate\Database\Eloquent\Model;
-
 use Leeto\MoonShineTree\Resources\TreeResource;
 use MoonShine\Laravel\Fields\Relationships\BelongsTo;
 use MoonShine\Laravel\Pages\Crud\DetailPage;

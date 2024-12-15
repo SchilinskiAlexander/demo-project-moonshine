@@ -4,7 +4,6 @@ namespace App\MoonShine\Resources;
 
 use App\Models\Setting;
 use App\MoonShine\Pages\SettingPage;
-use App\MoonShine\Traits\CommonPageFields;
 use MoonShine\Laravel\Resources\ModelResource;
 use MoonShine\UI\Fields\Email;
 use MoonShine\UI\Fields\ID;

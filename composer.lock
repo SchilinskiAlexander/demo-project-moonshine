@@ -2663,16 +2663,16 @@
         },
         {
             "name": "moonshine/moonshine",
-            "version": "3.0.2",
+            "version": "3.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moonshine-software/moonshine.git",
-                "reference": "05d6b89b2adae0379c003b6e973f65b18dfabc70"
+                "reference": "06ee927e39d87f0f72135780ed82f0d65b85d21f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moonshine-software/moonshine/zipball/05d6b89b2adae0379c003b6e973f65b18dfabc70",
-                "reference": "05d6b89b2adae0379c003b6e973f65b18dfabc70",
+                "url": "https://api.github.com/repos/moonshine-software/moonshine/zipball/06ee927e39d87f0f72135780ed82f0d65b85d21f",
+                "reference": "06ee927e39d87f0f72135780ed82f0d65b85d21f",
                 "shasum": ""
             },
             "require": {
@@ -2766,7 +2766,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2024-12-13T14:21:05+00:00"
+            "time": "2024-12-15T11:46:43+00:00"
         },
         {
             "name": "moonshine/permissions",
