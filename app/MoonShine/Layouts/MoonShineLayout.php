@@ -81,8 +81,6 @@ final class MoonShineLayout extends AppLayout
 
     public function build(): Layout
     {
-        // parent::build();
-
         return Layout::make([
             Html::make([
                 $this->getHeadComponent(),
