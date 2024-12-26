@@ -71,8 +71,6 @@ class ArticleResource extends ModelResource implements HasImportExportContract
 
     public string $column = 'title';
 
-    protected ?PageType $redirectAfterSave = PageType::INDEX;
-
     protected function exportFields(): iterable
     {
         return [
